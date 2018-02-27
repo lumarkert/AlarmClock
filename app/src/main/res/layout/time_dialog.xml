@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lukas.alarmclock.CustomNumberPicker
+        android:id="@+id/hoursPicker"
+        max="23"
+        min="0"
+        android:layout_width="30dp"
+        android:layout_height="88dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_weight="1"
+        android:text="Stunden"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <com.lukas.alarmclock.CustomNumberPicker
+        android:id="@+id/minutesPicker"
+        max="59"
+        min="0"
+        android:layout_width="30dp"
+        android:layout_height="88dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_weight="1"
+        android:text="Minuten"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_weight="1">
+
+        <RadioButton
+            android:id="@+id/vorherButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Vorher" />
+
+        <RadioButton
+            android:id="@+id/danachButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Danach" />
+    </RadioGroup>
+</LinearLayout>
