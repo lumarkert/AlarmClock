@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.NumberPicker;
 
 /**
@@ -17,7 +18,7 @@ import android.widget.NumberPicker;
 public class PickTimeDialogFragment extends DialogFragment {
 
     public interface NoticeDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+        public void onDialogPositiveClick(short hours, short minutes, boolean before);
     }
 
     NoticeDialogListener mListener;
@@ -41,11 +42,16 @@ public class PickTimeDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        View mView = inflater.inflate(R.layout.time_dialog,null);
+        final CustomNumberPicker hoursPicker = (CustomNumberPicker)mView.findViewById(R.id.hoursPicker);
+        final CustomNumberPicker minutesPicker = (CustomNumberPicker)mView.findViewById(R.id.minutesPicker);
 
-        builder.setView(inflater.inflate(R.layout.time_dialog, null))
+        builder.setView(mView)
                 .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        NoticeDialogListener activity = (NoticeDialogListener) getActivity();
+                        activity.onDialogPositiveClick((short)hoursPicker.getValue(), (short)minutesPicker.getValue(), true);
                         PickTimeDialogFragment.this.getDialog().dismiss();
                        // mListener.onDialogPositiveClick(PickTimeDialogFragment.this);
                     }

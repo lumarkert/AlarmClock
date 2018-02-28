@@ -40,6 +40,7 @@ public class ProfileArrayAdapter extends BaseAdapter implements ListAdapter {
     public long getItemId(int pos) {
         return 0;
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -73,6 +74,7 @@ public class ProfileArrayAdapter extends BaseAdapter implements ListAdapter {
                 TimeProfile tp = list.get(position);
                 Intent intent = new Intent(context, ProfileActivity.class);
                 intent.putExtra("profile", tp);
+                intent.putExtra("position", position);
                 context.startActivity(intent);
                 notifyDataSetChanged();
             }
