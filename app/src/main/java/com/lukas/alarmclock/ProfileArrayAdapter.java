@@ -60,27 +60,26 @@ public class ProfileArrayAdapter extends BaseAdapter implements ListAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO: add implementation of Delete Button of Time Profile Array
-                //do something
-                list.remove(position); //or some other task
+                list.remove(position);
                 notifyDataSetChanged();
             }
         });
         editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO: add implementation of Edit Button of Time Profile Array
                 //do something
+                MainActivity act = (MainActivity) context;
                 TimeProfile tp = list.get(position);
                 Intent intent = new Intent(context, ProfileActivity.class);
                 intent.putExtra("profile", tp);
                 intent.putExtra("position", position);
-                context.startActivity(intent);
+                act.startProfileActivity(intent);
                 notifyDataSetChanged();
             }
         });
 
         return view;
     }
+
 }
 

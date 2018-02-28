@@ -76,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity implements PickTimeDialog
         intent.putExtra("profile", timeProfile);
         intent.putExtra("position", position);
         setResult(Activity.RESULT_OK, intent);
-        finish()
+        finish();
+        super.onBackPressed();
     }
 }

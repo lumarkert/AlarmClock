@@ -56,8 +56,6 @@ public class ClockArrayAdapter extends BaseAdapter implements ListAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO: add implementation of Delete Button of Time Clock Array
-                //do something
                 list.remove(position); //or some other task
                 notifyDataSetChanged();
             }

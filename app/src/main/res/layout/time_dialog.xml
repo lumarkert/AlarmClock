@@ -38,16 +38,10 @@
         android:textStyle="bold" />
 
     <RadioGroup
+        android:id="@+id/beforeGroup"
         android:layout_width="wrap_content"
         android:layout_height="88dp"
         android:layout_weight="1">
-
-        <RadioButton
-            android:id="@+id/vorherButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Vorher" />
 
         <RadioButton
             android:id="@+id/danachButton"
@@ -55,5 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Danach" />
+
+        <RadioButton
+            android:id="@+id/vorherButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Vorher" />
     </RadioGroup>
 </LinearLayout>
