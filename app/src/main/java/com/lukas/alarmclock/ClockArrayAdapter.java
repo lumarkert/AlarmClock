@@ -1,6 +1,7 @@
 package com.lukas.alarmclock;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +64,11 @@ public class ClockArrayAdapter extends BaseAdapter implements ListAdapter {
         editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO: add implementation of Edit Button of Time Clock Array
-                notifyDataSetChanged();
+                ProfileActivity act = (ProfileActivity ) context;
+                TimeClock tp = list.get(position);
+                EditTimeClockDialogFragment tdp = EditTimeClockDialogFragment.newInstance(list.get(position),position);
+                tdp.show(act.getSupportFragmentManager(), "dialog");
+
             }
         });
 

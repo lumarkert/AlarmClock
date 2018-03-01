@@ -27,6 +27,10 @@ public class TimeProfile implements Serializable{
         timeClockArrayList.remove(timeClock);
     }
 
+    public String getProfileName() {
+        return m_profileName;
+    }
+
     public ArrayList<TimeClock> getTimeClockArrayList() {
         return timeClockArrayList;
     }

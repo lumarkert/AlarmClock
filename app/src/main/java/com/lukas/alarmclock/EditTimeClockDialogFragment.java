@@ -1,29 +1,36 @@
 package com.lukas.alarmclock;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.NumberPicker;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 
 /**
- * Created by Lukas on 27.02.2018.
+ * Created by Lukas on 01.03.2018.
  */
 
-public class PickTimeDialogFragment extends DialogFragment {
+public class EditTimeClockDialogFragment extends DialogFragment {
+    TimeClock m_timeClock;
+    int position;
 
-    public interface NoticeDialogListener {
-        public void onDialogPositiveClick(short hours, short minutes, boolean before);
+    public interface EditTimeClockDialogListener {
+        public void onTimeClockPositiveClick(TimeClock tc, int position);
     }
 
-    NoticeDialogListener mListener;
+    static EditTimeClockDialogFragment newInstance(TimeClock tc, int position) {
+        EditTimeClockDialogFragment f = new EditTimeClockDialogFragment();
+        f.setTimeClock(tc);
+        f.setPosition(position);
+        return f;
+    }
+
+    EditTimeClockDialogListener mListener;
 
     @Override
     public void onAttach(Context context) {
@@ -31,7 +38,7 @@ public class PickTimeDialogFragment extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (NoticeDialogListener) context;
+            mListener = (EditTimeClockDialogListener) context;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
@@ -41,6 +48,7 @@ public class PickTimeDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        setRetainInstance(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -48,31 +56,48 @@ public class PickTimeDialogFragment extends DialogFragment {
         final CustomNumberPicker hoursPicker = (CustomNumberPicker) mView.findViewById(R.id.hoursPicker);
         final CustomNumberPicker minutesPicker = (CustomNumberPicker) mView.findViewById(R.id.minutesPicker);
         final RadioGroup beforeGroup = (RadioGroup) mView.findViewById(R.id.beforeGroup);
-        beforeGroup.check(R.id.danachButton);
+        hoursPicker.setValue(m_timeClock.getHours());
+        minutesPicker.setValue(m_timeClock.getMinutes());
+        if (m_timeClock.isBefore()) {
+            beforeGroup.check(R.id.vorherButton);
+        } else {
+            beforeGroup.check(R.id.danachButton);
+        }
+
 
         builder.setView(mView)
                 .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        NoticeDialogListener activity = (NoticeDialogListener) getActivity();
-                        boolean isBefore = true;
+                        EditTimeClockDialogListener activity = (EditTimeClockDialogListener) getActivity();
+                        m_timeClock.setHours((short) hoursPicker.getValue());
+                        m_timeClock.setMinutes((short) minutesPicker.getValue());
                         if (beforeGroup.getCheckedRadioButtonId() == R.id.vorherButton) {
-                            isBefore = true;
+                            m_timeClock.setBefore(true);
                         } else if (beforeGroup.getCheckedRadioButtonId() == R.id.danachButton) {
-                            isBefore = false;
+                            m_timeClock.setBefore(false);
                         }
-                        activity.onDialogPositiveClick((short) hoursPicker.getValue(), (short) minutesPicker.getValue(), isBefore);
-                        PickTimeDialogFragment.this.getDialog().dismiss();
-                        // mListener.onDialogPositiveClick(PickTimeDialogFragment.this);
+                        activity.onTimeClockPositiveClick(m_timeClock, position);
+                        EditTimeClockDialogFragment.this.getDialog().dismiss();
+
                     }
                 })
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        PickTimeDialogFragment.this.getDialog().cancel();
+                        EditTimeClockDialogFragment.this.getDialog().cancel();
                     }
                 });
         return builder.create();
 
     }
+
+    public void setTimeClock(TimeClock timeClock) {
+        this.m_timeClock = timeClock;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
 }

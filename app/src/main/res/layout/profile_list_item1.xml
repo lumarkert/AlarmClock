@@ -34,4 +34,14 @@
         android:layout_toLeftOf="@id/delete_btn"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
+    <ImageButton
+        android:id="@+id/clock_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/edit_btn"
+        app:srcCompat="@android:drawable/btn_star_big_off" />
+
 </RelativeLayout>

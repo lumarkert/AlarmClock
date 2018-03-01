@@ -57,7 +57,6 @@ public class NewProfileDialogFragment extends DialogFragment {
                 .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //TODO:Dialog Negativer Button
                         NewProfileDialogFragment.this.getDialog().cancel();
                     }
                 });

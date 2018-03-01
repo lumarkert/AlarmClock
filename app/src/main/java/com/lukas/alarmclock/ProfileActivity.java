@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by Lukas on 26.02.2018.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PickTimeDialogFragment.NoticeDialogListener {
+public class ProfileActivity extends AppCompatActivity implements PickTimeDialogFragment.NoticeDialogListener,EditTimeClockDialogFragment.EditTimeClockDialogListener {
     TimeProfile timeProfile;
     int position = -1;
 
@@ -67,6 +67,11 @@ public class ProfileActivity extends AppCompatActivity implements PickTimeDialog
         TimeClock tc = new TimeClock(hours, minutes, before);
         timeProfile.addTimeClock(tc);
         Log.d("OnDialogPositiveClick", "Size: " + timeProfile.getTimeClockArrayList().size());
+        updateListView();
+    }
+    @Override
+    public void onTimeClockPositiveClick(TimeClock tc, int position){
+        timeProfile.getTimeClockArrayList().set(position, tc);
         updateListView();
     }
 

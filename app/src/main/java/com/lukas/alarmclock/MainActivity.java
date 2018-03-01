@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements NewProfileDialogF
         startActivityForResult(i, 1);
     }
 
+    public void startClockActivity(Intent i) {
+        startActivity(i);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -96,10 +100,13 @@ public class MainActivity extends AppCompatActivity implements NewProfileDialogF
         ProfileArrayAdapter adapter = new ProfileArrayAdapter(list, this);
         listView1.setAdapter(adapter);
     }
+
+
 }
 
 
-//TODO: New Menu for Profile Activity(add AND rename)
+//TODO: New Menu for Profile Activity (rename)
+//TODO: Clock Activity
 
 //PickTimeDialogFragment tdp = new PickTimeDialogFragment();
 //tdp.show(getSupportFragmentManager(),"dialog");

@@ -26,6 +26,7 @@ public class ProfileArrayAdapter extends BaseAdapter implements ListAdapter {
         this.list = list;
         this.context = context;
     }
+
     @Override
     public int getCount() {
         return list.size();
@@ -50,21 +51,22 @@ public class ProfileArrayAdapter extends BaseAdapter implements ListAdapter {
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
+        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position).toString());
 
         //Handle buttons and add onClickListeners
-        ImageButton deleteBtn = (ImageButton)view.findViewById(R.id.delete_btn);
-        ImageButton editBtn = (ImageButton)view.findViewById(R.id.edit_btn);
+        ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.delete_btn);
+        ImageButton editBtn = (ImageButton) view.findViewById(R.id.edit_btn);
+        ImageButton clockBtn = (ImageButton) view.findViewById(R.id.clock_btn);
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 list.remove(position);
                 notifyDataSetChanged();
             }
         });
-        editBtn.setOnClickListener(new View.OnClickListener(){
+        editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //do something
@@ -74,6 +76,17 @@ public class ProfileArrayAdapter extends BaseAdapter implements ListAdapter {
                 intent.putExtra("profile", tp);
                 intent.putExtra("position", position);
                 act.startProfileActivity(intent);
+                notifyDataSetChanged();
+            }
+        });
+        clockBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity act = (MainActivity) context;
+                TimeProfile tp = list.get(position);
+                Intent intent = new Intent(context, ClockActivity.class);
+                intent.putExtra("profile", tp);
+                act.startClockActivity(intent);
                 notifyDataSetChanged();
             }
         });
