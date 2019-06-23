@@ -101,12 +101,25 @@ public class MainActivity extends AppCompatActivity implements NewProfileDialogF
         listView1.setAdapter(adapter);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable("profile", list);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        list = (ArrayList<TimeProfile>) savedInstanceState.getSerializable("profile");
+    }
+
 
 }
 
 
 //TODO: New Menu for Profile Activity (rename)
-//TODO: Clock Activity
+////TODO: Save File
+//TODO: FAB Button
 
 //PickTimeDialogFragment tdp = new PickTimeDialogFragment();
 //tdp.show(getSupportFragmentManager(),"dialog");
